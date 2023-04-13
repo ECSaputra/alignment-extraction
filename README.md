@@ -16,5 +16,10 @@ The input datasets for this procedure are:
 
 ### Step 1: Split chromosome-specific MAF into smaller fragments
 
+To make the operation computationally feasible, start by splitting the MAF of a chromosome into smaller fragments of about 100kb-300kb, depending on the size of your MAF. Use the `maf_parse` function from PHAST to do this (see documentation [here](http://compgen.cshl.edu/phast/help-pages/maf_parse.txt)).
 
+Below is an example command for splitting the MAF of chrY (`mouse24way_chrY.maf`) into fragments of 300kb. The resulting outputs can be seen in the folder `data/alignment/chrY/`.
 
+```
+maf_parse mouse24way_chrY.maf --split 300000 --out-root data/alignment/chrY/chrYsplit
+```
