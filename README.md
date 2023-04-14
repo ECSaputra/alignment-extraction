@@ -61,5 +61,22 @@ Rscript getGeneBoundaries.R -c chrY -i output/CDS-coordinates/mm10.ncbiRefSeq.co
 
 This step extracts the alignments of coding regions of interest in the FASTA format. This step is performed by the function `getCodingAlignments.R`, which takes the following arguments:
 
+* `-c, --chromosome`: chromosome of interest
+
+* `-r, --refseq`: reference sequence of alignment
+
+* `-i, --cds_info_folder`: CDS information folder (output folder path from Step 3), end path with slash
+
+* `-o, --output_folder`: output folder for coding region alignments
+
+* `-a, --mafFolderPath`: path to folder containing chromosome MAF fragments (end path with slash)
+
+* `-p, --prefix`: prefix of MAF fragments
+
+The following is an example of how to run the function from the command line. Resulting alignments are reverse-complemented when necessary. Example outputs can be seen in the folder `output/coding-region-alignment/chrY/`.
+
+```
+Rscript getCodingAlignments.R -c chrY -r mm10 -i output/CDS-information/ -o output/coding-region-alignment/chrY/ -a data/alignment/chrY/ -p chrYsplit
+```
 
 
