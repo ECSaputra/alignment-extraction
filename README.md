@@ -79,4 +79,8 @@ The following is an example of how to run the function from the command line. Re
 Rscript getCodingAlignments.R -c chrY -r mm10 -i output/CDS-information/ -o output/coding-region-alignment/chrY/ -a data/alignment/chrY/ -p chrYsplit
 ```
 
+## Extraction of *non-coding region* alignments
+
+
+
 
