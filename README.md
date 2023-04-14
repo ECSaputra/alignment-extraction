@@ -13,6 +13,7 @@ The input datasets for this procedure are:
 
 * MAF of the chromosome of interest, fragmented into smaller chunks
 
+Example input and output files can be found in folder `data` and `output`.
 
 ### Step 1: Split chromosome-specific MAF into smaller fragments
 
@@ -23,3 +24,42 @@ Below is an example command for splitting the MAF of chrY (`mouse24way_chrY.maf`
 ```
 maf_parse mouse24way_chrY.maf --split 300000 --out-root data/alignment/chrY/chrYsplit
 ```
+
+
+### Step 2: Obtain the coordinates of coding regions (CDS) from GTF file
+
+This step produces a GTF file that only contains coding region coordinates of genes in the chromosome of interest. This step is performed by the function `getCDSCoordinates.R`, which takes the following arguments:
+
+* `-i, --inputpath`: path to input GTF file
+
+* `-o, --outputpath`: path to output GTF file (CDS only)
+
+The following is an example of how to run the function from the command line:
+
+```
+Rscript getCDSCoordinates.R -i data/genepred/mm10.ncbiRefSeq.chrY.gtf -o output/CDS-coordinates/mm10.ncbiRefSeq.coding.chrY.gtf
+```
+
+
+### Step 3: Get gene boundaries and CDS coordinates per gene
+
+This step produces data structures necessary for the subsequent extraction of coding region alignments. This step is performed by the function `getGeneBoundaries.R`, which takes the following arguments:
+
+* `-c, --chromosome`: chromosome of interest
+
+* `-i, --genepred_cds_path`: GTF file path containing the CDS coordinates in the chromosome of interest (output from Step 2)
+
+* `-o, --output_folder`: output folder path (end path with slash)
+
+The following is an example of how to run the function from the command line:
+
+```
+Rscript getGeneBoundaries.R -c chrY -i output/CDS-coordinates/mm10.ncbiRefSeq.coding.chrY.gtf -o output/CDS-information/
+```
+
+### Step 4: Extract coding region alignments
+
+This step extracts the alignments of coding regions of interest in the FASTA format. This step is performed by the function `getCodingAlignments.R`, which takes the following arguments:
+
+
+
