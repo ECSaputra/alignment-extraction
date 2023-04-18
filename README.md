@@ -25,7 +25,6 @@ Below is an example command for splitting the MAF of chrY (`mouse24way_chrY.maf`
 maf_parse mouse24way_chrY.maf --split 300000 --out-root data/alignment/chrY/chrYsplit
 ```
 
-
 ### Step 2: Obtain the coordinates of coding regions (CDS) from GTF file
 
 This step produces a GTF file that only contains coding region coordinates of genes in the chromosome of interest. This step is performed by the function `getCDSCoordinates.R`, which takes the following arguments:
@@ -81,6 +80,36 @@ Rscript getCodingAlignments.R -c chrY -r mm10 -i output/CDS-information/ -o outp
 
 ## Extraction of *non-coding region* alignments
 
+Similar to the coding region extraction, non-coding region alignment extraction is also done in a **chromosome-specific** manner.
 
+The input datasets for this procedure are:
 
+* BED file containing coordinates of non-coding regions for *each* chromosome of interest
 
+* MAF of the chromosome of interest, fragmented into smaller chunks
+
+### Step 1: Split chromosome-specific MAF into smaller fragments
+
+The same as Step 1 for coding regions.
+
+### Step 2: Extract non-coding region alignments
+
+This step extracts the alignments of non-coding regions of interest in the FASTA format. This step is performed by the function `getNonCodingAlignments.R`, which takes the following arguments:
+
+* `-c, --chromosome`: chromosome of interest
+
+* `-r, --refseq`: reference sequence of alignment
+
+* `-i, --elementBedPath`: path to BED file containing coordinates of regions of interest
+
+* `-o, --output_folder`: output folder for non-coding region alignments
+
+* `-a, --mafFolderPath`: path to folder containing chromosome MAF fragments (end path with slash)
+
+* `-p, --prefix`: prefix of MAF fragments
+
+The following is an example of how to run the function from the command line. Example outputs can be seen in the folder `output/CNE-alignment/`.
+
+```
+Rscript getNonCodingAlignments.R -c chrY -r mm10 -i data/CNE-coordinates/mouseCNEs.chrY.bed -o output/CNE-alignment/ -a data/alignment/chrY/ -p chrYsplit
+```
