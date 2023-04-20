@@ -11,7 +11,7 @@ option_list = list(make_option(c('-c', '--chromosome'), type='character', defaul
 opt_parser = OptionParser(option_list=option_list)
 opt = parse_args(opt_parser)
 
-chromosome = opt$chromosome
+chr = opt$chromosome
 elementBedPath = opt$elementBed
 mafFolderPath = opt$mafFolderPath
 refseq = opt$refseq
